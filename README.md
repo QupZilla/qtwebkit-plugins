@@ -1,4 +1,8 @@
-qtwebkit-spellcheck
+QtWebKit plugins
+----------------------------------------------------------------------------------------
+Set of QtWebKit platform plugins for the latest QtWebKit 2.3 version.
+
+SpellCheck
 ----------------------------------------------------------------------------------------
 
 QtWebKit plugin that provides support for spell checking using the 

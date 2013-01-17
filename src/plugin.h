@@ -1,5 +1,5 @@
 /* ============================================================
-* qtwebkit-spellcheck Spell checking plugin using Hunspell
+* qtwebkit-plugins Plugins for QtWebKit
 * Copyright (C) 2013  David Rosca <nowrep@gmail.com>
 *
 * This program is free software: you can redistribute it and/or modify
@@ -15,27 +15,27 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 * ============================================================ */
-#include "spellplugin.h"
-#include "spellcheck.h"
+#ifndef PLUGIN_H
+#define PLUGIN_H
 
-SpellPlugin::SpellPlugin()
+#include <QtGlobal>
+#include <QtPlugin>
+#include "qwebkitplatformplugin.h"
+
+class QtWebKitPlugin : public QObject, public QWebKitPlatformPlugin
 {
-}
+    Q_OBJECT
+    Q_INTERFACES(QWebKitPlatformPlugin)
 
-bool SpellPlugin::supportsExtension(Extension ext) const
-{
-    return ext == SpellChecker;
-}
-
-QObject* SpellPlugin::createExtension(Extension ext) const
-{
-    if (ext == SpellChecker) {
-        return new SpellCheck();
-    }
-
-    return 0;
-}
-
-#if QT_VERSION < 0x050000
-Q_EXPORT_PLUGIN2(spellchecker, SpellPlugin);
+#if QT_VERSION >= 0x050000
+    Q_PLUGIN_METADATA(IID "org.qtwebkit.QtWebKit.QtWebKitPlugin")
 #endif
+
+public:
+    explicit QtWebKitPlugin();
+
+    bool supportsExtension(Extension ext) const;
+    QObject* createExtension(Extension ext) const;
+};
+
+#endif // PLUGIN_H

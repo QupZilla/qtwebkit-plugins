@@ -15,27 +15,27 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 * ============================================================ */
-#ifndef SPELLPLUGIN_H
-#define SPELLPLUGIN_H
+#include "plugin.h"
+#include "spellcheck/spellcheck.h"
 
-#include <QtGlobal>
-#include <QtPlugin>
-#include "qwebkitplatformplugin.h"
-
-class SpellPlugin : public QObject, public QWebKitPlatformPlugin
+QtWebKitPlugin::QtWebKitPlugin()
 {
-    Q_OBJECT
-    Q_INTERFACES(QWebKitPlatformPlugin)
+}
 
-#if QT_VERSION >= 0x050000
-    Q_PLUGIN_METADATA(IID "org.qtwebkit.QtWebKit.SpellCheckPlugin")
+bool QtWebKitPlugin::supportsExtension(Extension ext) const
+{
+    return ext == SpellChecker;
+}
+
+QObject* QtWebKitPlugin::createExtension(Extension ext) const
+{
+    if (ext == SpellChecker) {
+        return new SpellCheck();
+    }
+
+    return 0;
+}
+
+#if QT_VERSION < 0x050000
+Q_EXPORT_PLUGIN2(qtwebkitplugins, QtWebKitPlugin);
 #endif
-
-public:
-    SpellPlugin();
-
-    bool supportsExtension(Extension ext) const;
-    QObject* createExtension(Extension ext) const;
-};
-
-#endif // SPELLPLUGIN_H
