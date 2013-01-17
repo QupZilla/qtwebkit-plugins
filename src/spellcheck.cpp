@@ -161,7 +161,8 @@ bool SpellCheck::endOfWord(const QTextBoundaryFinder::BoundaryReasons &reasons,
                const QTextBoundaryFinder::BoundaryType &type)
 {
 #if QT_VERSION < 0x050000
-    reasons & QTextBoundaryFinder::EndWord;
+    Q_UNUSED(type)
+    return reasons & QTextBoundaryFinder::EndWord;
 #else
     return (reasons & QTextBoundaryFinder::EndOfItem) &&
            (type & QTextBoundaryFinder::Word);
@@ -172,7 +173,8 @@ bool SpellCheck::startOfWord(const QTextBoundaryFinder::BoundaryReasons &reasons
                const QTextBoundaryFinder::BoundaryType &type)
 {
 #if QT_VERSION < 0x050000
-    reasons & QTextBoundaryFinder::StartWord;
+    Q_UNUSED(type)
+    return reasons & QTextBoundaryFinder::StartWord;
 #else
     return (reasons & QTextBoundaryFinder::StartOfItem) &&
            (type & QTextBoundaryFinder::Word);
