@@ -2,7 +2,7 @@ qtwebkit-spellcheck
 ----------------------------------------------------------------------------------------
 
 QtWebKit plugin that provides support for spell checking using the 
-[Hunspell](http://hunspell.sourceforge.net/) library.
+[Hunspell](http://hunspell.sourceforge.net/) library.  
 Although this plugin was written for QupZilla web browser, it has no dependency on it and
 can be used with every QtWebKit based application.
 
@@ -23,7 +23,7 @@ Plugin will then be installed into `$QTDIR/plugins/webkit` directory.
 
 Settings
 ----------------------------------------------------------------------------------------
-In order to provide spell checking, dictionaries needs to be found and loaded.
+In order to provide spell checking, dictionaries needs to be found and loaded.  
 This plugin is looking for possible directories by parsing `DICTIONARY` and `DICPATH` environment
 variables. If those variables are not set, the plugin will look for dictionaries in
 `/usr/share/hunspell/`.
