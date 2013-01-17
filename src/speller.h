@@ -30,6 +30,7 @@ public:
     ~Speller();
 
     bool initialize();
+
     QString backend() const;
     QString language() const;
 
@@ -44,11 +45,12 @@ private:
     QString parseLanguage(const QString &path);
     QString getDictionaryPath();
 
-    Hunspell* m_hunspell;
-    QTextCodec* m_codec;
+    static Hunspell* s_hunspell;
+    static QTextCodec* s_codec;
+    static QString s_dictionaryPath;
+    static QString s_langugage;
+    static bool s_initialized;
 
-    QString m_dictionaryPath;
-    QString m_langugage;
     QStringList m_ignoredWords;
 };
 

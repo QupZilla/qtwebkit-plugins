@@ -21,19 +21,12 @@
 #include "spellcheck.h"
 #include "speller.h"
 
-#include <QDebug>
-
 SpellCheck::SpellCheck()
     : m_speller(0)
 {
     m_speller = new Speller();
 
-    if (m_speller->initialize()) {
-        qDebug() << "SpellCheck: Backend =" << m_speller->backend()
-                 << "Language =" << m_speller->language();
-    }
-    else {
-        qWarning() << "SpellCheck: Initialization failed!";
+    if (!m_speller->initialize()) {
         delete m_speller;
         m_speller = 0;
     }

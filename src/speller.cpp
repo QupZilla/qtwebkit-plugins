@@ -26,27 +26,39 @@
 
 #include <hunspell/hunspell.hxx>
 
+Hunspell* Speller::s_hunspell = 0;
+QTextCodec* Speller::s_codec = 0;
+QString Speller::s_dictionaryPath;
+QString Speller::s_langugage;
+bool Speller::s_initialized = false;
+
 Speller::Speller()
-    : m_hunspell(0)
-    , m_codec(0)
 {
-    m_dictionaryPath = getDictionaryPath();
-    m_langugage = parseLanguage(m_dictionaryPath);
 }
 
 bool Speller::initialize()
 {
-    if (m_dictionaryPath.isEmpty() || m_langugage.isEmpty()) {
+    if (s_initialized) {
+        return s_hunspell;
+    }
+
+    s_dictionaryPath = getDictionaryPath();
+    s_langugage = parseLanguage(s_dictionaryPath);
+
+    if (s_dictionaryPath.isEmpty() || s_langugage.isEmpty()) {
+        qWarning() << "SpellCheck: Initialization failed!";
         return false;
     }
 
-    QString dicPath = m_dictionaryPath +  ".dic";
-    QString affPath = m_dictionaryPath + ".aff";
+    QString dicPath = s_dictionaryPath +  ".dic";
+    QString affPath = s_dictionaryPath + ".aff";
 
-    m_hunspell = new Hunspell(affPath.toLocal8Bit().constData(),
+    s_hunspell = new Hunspell(affPath.toLocal8Bit().constData(),
                               dicPath .toLocal8Bit().constData());
 
-    m_codec = QTextCodec::codecForName(m_hunspell->get_dic_encoding());
+    s_codec = QTextCodec::codecForName(s_hunspell->get_dic_encoding());
+
+    qDebug() << "SpellCheck: Language =" << language();
     return true;
 }
 
@@ -57,13 +69,13 @@ QString Speller::backend() const
 
 QString Speller::language() const
 {
-    return m_langugage;
+    return s_langugage;
 }
 
 void Speller::learnWord(const QString &word)
 {
-    const char* encodedWord = m_codec->fromUnicode(word).constData();
-    m_hunspell->add(encodedWord);
+    const char* encodedWord = s_codec->fromUnicode(word).constData();
+    s_hunspell->add(encodedWord);
 }
 
 void Speller::ignoreWordInSpellDocument(const QString &word)
@@ -77,21 +89,21 @@ bool Speller::isMisspelled(const QString &string)
         return false;
     }
 
-    const char* encodedString = m_codec->fromUnicode(string).constData();
-    return m_hunspell->spell(encodedString) == 0;
+    const char* encodedString = s_codec->fromUnicode(string).constData();
+    return s_hunspell->spell(encodedString) == 0;
 }
 
 QStringList Speller::suggest(const QString &word)
 {
     char **suggestions;
-    const char* encodedWord = m_codec->fromUnicode(word).constData();
-    int count = m_hunspell->suggest(&suggestions, encodedWord);
+    const char* encodedWord = s_codec->fromUnicode(word).constData();
+    int count = s_hunspell->suggest(&suggestions, encodedWord);
 
     QStringList suggests;
     for(int i = 0; i < count; ++i) {
-        suggests.append(m_codec->toUnicode(suggestions[i]));
+        suggests.append(s_codec->toUnicode(suggestions[i]));
     }
-    m_hunspell->free_list(&suggestions, count);
+    s_hunspell->free_list(&suggestions, count);
 
     return suggests;
 }
@@ -164,5 +176,4 @@ QString Speller::getDictionaryPath()
 
 Speller::~Speller()
 {
-    delete m_hunspell;
 }
