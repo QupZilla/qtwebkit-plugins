@@ -17,6 +17,7 @@
 * ============================================================ */
 #include "plugin.h"
 #include "spellcheck/spellcheck.h"
+#include "notifications/notificationpresenter.h"
 
 QtWebKitPlugin::QtWebKitPlugin()
 {
@@ -24,16 +25,21 @@ QtWebKitPlugin::QtWebKitPlugin()
 
 bool QtWebKitPlugin::supportsExtension(Extension ext) const
 {
-    return ext == SpellChecker;
+    return (ext == SpellChecker || ext == Notifications);
 }
 
 QObject* QtWebKitPlugin::createExtension(Extension ext) const
 {
-    if (ext == SpellChecker) {
+    switch (ext) {
+    case SpellChecker:
         return new SpellCheck();
-    }
 
-    return 0;
+    case Notifications:
+        return new NotificationPresenter();
+
+    default:
+        return 0;
+    }
 }
 
 #if QT_VERSION < 0x050000

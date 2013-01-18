@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/notifications">
+        <file>webkit.png</file>
+    </qresource>
+</RCC>

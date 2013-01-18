@@ -19,7 +19,7 @@ HEADERS += $$PWD/qwebkitplatformplugin.h \
     plugin.h
 
 include($$PWD/spellcheck/spellcheck.pri)
-#include($$PWD/spellcheck/notifications.pri)
+include($$PWD/notifications/notifications.pri)
 
 !mac:unix {
     target.path = $$[QT_INSTALL_PLUGINS]/webkit

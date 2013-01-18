@@ -22,7 +22,8 @@
 #include "speller.h"
 
 SpellCheck::SpellCheck()
-    : m_speller(0)
+    : QWebSpellChecker()
+    , m_speller(0)
 {
     m_speller = new Speller();
 
