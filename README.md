@@ -5,12 +5,13 @@ Set of QtWebKit platform plugins for the latest QtWebKit 2.3 version.
 **SpellCheck**  
 QtWebKit plugin that provides support for spell checking using the 
 [Hunspell](http://hunspell.sourceforge.net/) library.  
-Although this plugin was written for QupZilla web browser, it has no dependency on it and
-can be used with every QtWebKit based application.  
 
 **Notifications**  
 QtWebKit plugin that provides support for showing HTML5 Notifications through DBus
-`org.freedesktop.Notifications`.
+`org.freedesktop.Notifications`.  
+
+Although these plugins were written for QupZilla web browser, it has no dependency on it and
+can be used with every QtWebKit based application.  
 
 Requirements
 ----------------------------------------------------------------------------------------

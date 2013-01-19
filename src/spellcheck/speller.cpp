@@ -39,7 +39,7 @@ Speller::Speller()
 bool Speller::initialize()
 {
     if (s_initialized) {
-        return s_hunspell;
+        return s_hunspell != 0;
     }
 
     s_dictionaryPath = getDictionaryPath();
@@ -59,6 +59,7 @@ bool Speller::initialize()
     s_codec = QTextCodec::codecForName(s_hunspell->get_dic_encoding());
 
     qDebug() << "SpellCheck: Language =" << language();
+    s_initialized = true;
     return true;
 }
 
