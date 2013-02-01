@@ -4,7 +4,7 @@ isEqual(QT_MAJOR_VERSION, 5) {
     QT *= core gui
 }
 
-TARGET = qtwebkitplugins
+TARGET = $$qtLibraryTarget(qtwebkitplugins)
 TEMPLATE = lib
 CONFIG += plugin
 
