@@ -10,8 +10,11 @@ QtWebKit plugin that provides support for spell checking using the
 QtWebKit plugin that provides support for showing HTML5 Notifications through DBus
 `org.freedesktop.Notifications`.  
 
-Although these plugins were written for QupZilla web browser, it has no dependency on it and
+Although this plugin was written for QupZilla web browser, it has no dependency on it and
 can be used with every QtWebKit based application.  
+  
+**NOTE:** This plugin is only useful for other QtWebKit applications. It is already
+included in QupZilla Web Browser.
 
 Requirements
 ----------------------------------------------------------------------------------------
