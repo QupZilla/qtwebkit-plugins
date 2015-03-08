@@ -180,7 +180,11 @@ public:
 };
 
 QT_BEGIN_NAMESPACE
-Q_DECLARE_INTERFACE(QWebKitPlatformPlugin, "com.nokia.Qt.WebKit.PlatformPlugin/1.9");
+#if QT_VERSION >= 0x050200
+Q_DECLARE_INTERFACE(QWebKitPlatformPlugin, "org.qt-project.Qt.WebKit.PlatformPlugin/1.9")
+#else
+Q_DECLARE_INTERFACE(QWebKitPlatformPlugin, "com.nokia.Qt.WebKit.PlatformPlugin/1.9")
+#endif
 QT_END_NAMESPACE
 
 #endif // QWEBKITPLATFORMPLUGIN_H
