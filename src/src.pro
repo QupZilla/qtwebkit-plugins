@@ -15,7 +15,7 @@ RCC_DIR = $$PWD/../build
 UI_DIR = $$PWD/../build
 
 SOURCES += $$PWD/plugin.cpp
-HEADERS += $$PWD/qwebkitplatformplugin.h \
+HEADERS += $$[QT_INSTALL_HEADERS]/QtWebKit/qwebkitplatformplugin.h \
     plugin.h
 
 include($$PWD/spellcheck/spellcheck.pri)
