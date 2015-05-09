@@ -1,7 +1,7 @@
 isEqual(QT_MAJOR_VERSION, 5) {
-    QT *= widgets
+    QT *= webkitwidgets widgets
 } else {
-    QT *= core gui
+    QT *= webkit core gui
 }
 
 TARGET = $$qtLibraryTarget(qtwebkitplugins)
@@ -15,8 +15,7 @@ RCC_DIR = $$PWD/../build
 UI_DIR = $$PWD/../build
 
 SOURCES += $$PWD/plugin.cpp
-HEADERS += $$[QT_INSTALL_HEADERS]/QtWebKit/qwebkitplatformplugin.h \
-    plugin.h
+HEADERS += $$PWD/plugin.h
 
 include($$PWD/spellcheck/spellcheck.pri)
 include($$PWD/notifications/notifications.pri)
