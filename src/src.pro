@@ -16,6 +16,7 @@ UI_DIR = $$PWD/../build
 
 SOURCES += $$PWD/plugin.cpp
 HEADERS += $$PWD/plugin.h
+HEADERS += $$[QT_INSTALL_HEADERS]/QtWebKit/qwebkitplatformplugin.h
 
 include($$PWD/spellcheck/spellcheck.pri)
 include($$PWD/notifications/notifications.pri)
