@@ -1,4 +1,4 @@
-lessThan(QT_VERSION, 4.4) {
+lessThan(QT_VERSION, 4.8) {
     error("qtwebkit-plugins requires at least Qt 4.8 and QtWebKit 2.3!")
 }
 
